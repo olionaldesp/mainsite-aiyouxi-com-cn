@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻将胡了 – 站点介绍与可信说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1e1e2a;
+            background-color: #f8f9fc;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0b0d1a 0%, #1d2238 100%);
+            color: #f0f2f5;
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 215, 100, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            position: relative;
+            color: #f7e9cc;
+        }
+
+        .hero .sub {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #b7bcd0;
+            max-width: 680px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero .sub a {
+            color: #f9d883;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(249, 216, 131, 0.3);
+            transition: border-color 0.2s;
+        }
+
+        .hero .sub a:hover {
+            border-bottom-color: #f9d883;
+        }
+
+        .tagline {
+            margin-top: 28px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #d0d5e8;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #fff;
+            border-bottom: 1px solid #e5e9f0;
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .nav-bar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1d2238;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #3e4056;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #b8863a;
+            border-bottom-color: #b8863a;
+        }
+
+        /* 浅色正文区 */
+        .main-content {
+            background: #ffffff;
+            padding: 50px 0 30px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #1b1e2b;
+            margin-bottom: 24px;
+            border-left: 5px solid #c99a4b;
+            padding-left: 16px;
+        }
+
+        .intro-text {
+            font-size: 1.05rem;
+            color: #2a2c3a;
+            margin-bottom: 32px;
+            max-width: 840px;
+        }
+
+        /* 三个场景模块 (卡片) */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin: 32px 0 48px;
+        }
+
+        .scene-card {
+            background: #f7f8fd;
+            border-radius: 18px;
+            padding: 32px 24px 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e9ecf3;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04);
+        }
+
+        .scene-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 14px;
+            color: #1d2238;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scene-card p {
+            color: #3a3e52;
+            font-size: 0.95rem;
+        }
+
+        .scene-card .emoji-badge {
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+
+        /* 常见说明 / FAQ 摘要 */
+        .faq-area {
+            background: #f1f3f9;
+            border-radius: 20px;
+            padding: 32px 32px 28px;
+            margin: 24px 0 40px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dfe3ed;
+            padding-bottom: 18px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1b1e2b;
+            margin-bottom: 6px;
+        }
+
+        .faq-a {
+            color: #3a3e52;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .faq-a a {
+            color: #b8863a;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(184, 134, 58, 0.25);
+        }
+
+        .faq-a a:hover {
+            border-bottom-color: #b8863a;
+        }
+
+        .cta-sentence {
+            background: #faf9f5;
+            padding: 28px 30px;
+            border-radius: 16px;
+            margin: 32px 0 16px;
+            border-left: 6px solid #c99a4b;
+            font-size: 1.05rem;
+            color: #1e202e;
+        }
+
+        .cta-sentence a {
+            color: #b8863a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(184, 134, 58, 0.25);
+        }
+
+        .cta-sentence a:hover {
+            border-bottom-color: #b8863a;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1d2238;
+            color: #9da3bb;
+            padding: 32px 0 24px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #d3c394;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .scene-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .scene-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-bar .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                gap: 20px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .faq-area {
+                padding: 24px 18px;
+            }
+            .cta-sentence {
+                padding: 20px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 深色头图 -->
+<section class="hero">
+    <div class="container">
+        <h1>麻将胡了 · 自在乐局</h1>
+        <div class="sub">
+            一个关于麻将文化与线上体验的轻介绍站。<br>
+            想了解更多？可以看看 <a href="https://app-site-mahjong.com">麻将胡了</a> 的站点说明。
+        </div>
+        <div class="tagline">🎴 聊聊牌桌 · 聊聊感受 · 聊聊可信</div>
+    </div>
+</section>
+
+<!-- 导航 -->
+<nav class="nav-bar">
+    <div class="container">
+        <div class="nav-logo">🀄️ 胡了</div>
+        <ul class="nav-links">
+            <li><a href="#">站点介绍</a></li>
+            <li><a href="#">场景</a></li>
+            <li><a href="#">常见说明</a></li>
+            <li><a href="#">可靠参考</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- 浅色正文区 -->
+<div class="main-content">
+    <div class="container">
+
+        <!-- 核心介绍 -->
+        <h2 class="section-title">站点介绍与可信说明</h2>
+        <div class="intro-text">
+            <p>很多人第一次接触线上麻将时，心里多少会有些嘀咕：这个平台靠不靠谱？界面是不是顺手？其实，<strong>麻将胡了</strong> 这个站点最初就是几位同好一起做的信息整理，主要分享关于麻将玩法、界面感受以及使用中的一些真实体会。我们不做什么夸大宣传，只想让新来的朋友能有个踏实的落脚点，自己看看、自己判断。</p>
+            <p style="margin-top: 14px;">站内内容都来自日常体验与社区反馈，没有经过包装的漂亮话，更多是实在的分享。如果你也对麻将主题感兴趣，不妨从 <a href="https://app-site-mahjong.com" style="color:#b8863a;text-decoration: underline;text-underline-offset:4px;">麻将胡了</a> 开始了解——页面里没有什么花哨套路，就是实实在在地告诉你一些基本情况和常见问题。</p>
+        </div>
+
+        <!-- 三个场景模块 -->
+        <h2 class="section-title" style="border-left-color: #b8863a;">🎯 三个使用场景</h2>
+        <div class="scene-grid">
+            <div class="scene-card">
+                <h3><span class="emoji-badge">🖥️</span> 日常浏览</h3>
+                <p>无论是用手机还是电脑，打开页面就能看。没有强制下载，也没有弹窗干扰。快速了解麻将相关信息和常见疑问，适合随手翻翻。</p>
+            </div>
+            <div class="scene-card">
+                <h3><span class="emoji-badge">📱</span> 移动端体验</h3>
+                <p>针对小屏做了适配，卡片布局和导航都会自动调整。路上、休息时都可以打开，看看场景说明或者 FAQ，不占用太多精力。</p>
+            </div>
+            <div class="scene-card">
+                <h3><span class="emoji-badge">🔍</span> 信息对照</h3>
+                <p>如果你在别的渠道看到了关于麻将胡了 的一些说法，可以来站点里对照一下基础说明。我们尽量保持内容一致、透明。</p>
+            </div>
+        </div>
+
+        <!-- 常见说明 / FAQ 摘要 -->
+        <div class="faq-area">
+            <h3 style="font-size:1.4rem;font-weight:500;margin-bottom:22px;color:#1b1e2b;">📌 常见说明</h3>
+            <div class="faq-item">
+                <div class="faq-q">这个站点是官方吗？</div>
+                <div class="faq-a">不是。这是一个由麻将爱好者维护的介绍性页面，目的是让感兴趣的人更清楚站点内容与使用方向。所有信息都基于实际体验整理。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">信息更新频率如何？</div>
+                <div class="faq-a">不定期更新。当发现新问题或收到靠谱反馈时，我们会调整 FAQ 和场景描述。没有固定排期，但会保持内容真实。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">我可以信任站内的链接吗？</div>
+                <div class="faq-a">我们只引用经过验证的基础页面，例如 <a href="https://app-site-mahjong.com">麻将胡了</a> 的主站链接就是直接指向说明来源的，没有夹带第三方推广。如果你发现任何异常，也欢迎反馈。</div>
+            </div>
+        </div>
+
+        <!-- 嵌入自然句子的链接 -->
+        <div class="cta-sentence">
+            🀄 如果你想直接体验或进一步确认实际界面，可以前往 <a href="https://app-site-mahjong.com">麻将胡了</a> 自己看一看、试一试。页面里的东西都很直白，不需要绕来绕去。
+        </div>
+
+        <!-- 补充一点轻内容 -->
+        <p style="color:#4b4f65; font-size:0.95rem; margin: 24px 0 10px; border-top:1px solid #eaeef5; padding-top:24px;">
+            <span style="background:#eef0f6; padding:3px 10px; border-radius:30px;">💡 提示</span> 本站所有描述均基于个人使用感受，不构成任何投资或决策建议。请根据自身情况判断。
+        </p>
+
+    </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <div class="container">
+        <p>© 2025 · 站点介绍与可信说明 · <a href="https://app-site-mahjong.com">麻将胡了</a></p>
+        <p style="margin-top:6px; font-size:0.85rem;">内容开放 · 如实记录 · 无诱导表述</p>
+    </div>
+</footer>
+
+</body>
+</html>
